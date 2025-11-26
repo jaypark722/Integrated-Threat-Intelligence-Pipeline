@@ -1,6 +1,6 @@
-# 🛡️ Threat Intelligence Pipeline: OpenCTI ➜ Splunk ➜ Zeek/Snort
+# Threat Intelligence Pipeline: OpenCTI ➜ Splunk ➜ Zeek/Snort
 
-## 📌 Overview
+## Overview
 
 This project demonstrates a **threat intelligence pipeline** leveraging **OpenCTI** to feed **Indicators of Compromise (IOCs)** into detection platforms such as **Splunk**, **Zeek**, and **Snort**. 
 
@@ -15,9 +15,9 @@ The entire setup is containerized using **Docker** to maintain portability and r
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
-### 🐳 Docker-Based Lab Environment
+### Docker-Based Lab Environment
 
 This lab uses **Docker** containers to host each of the following components:
 - **Splunk** (with OpenCTI Add-on)
@@ -30,22 +30,22 @@ This lab uses **Docker** containers to host each of the following components:
 
 ---
 
-### 1️⃣ Splunk Installation
+### 1. Splunk Installation
 
 To enable integration with OpenCTI, Splunk must run in its **own container**.
 
-> 📁 In this repository, refer to the `splunk/` folder for the correct `docker-compose.yml`.
+> In this repository, refer to the `splunk/` folder for the correct `docker-compose.yml`.
 
-> ⚠️ **Important Note:** The latest Splunk images may cause **KV store errors** which break the OpenCTI indicator dashboard.  
-> ✅ **Solution:** Use **Splunk version `9.0.5`**, which mitigates this issue.
+> **Important Note:** The latest Splunk images may cause **KV store errors** which break the OpenCTI indicator dashboard.  
+> **Solution:** Use **Splunk version `9.0.5`**, which mitigates this issue.
 
 ---
 
-### 2️⃣ OpenCTI Installation
+### 2. OpenCTI Installation
 
 OpenCTI also runs in a Docker container.
 
-> 📁 Refer to the `OpenCTI/` folder for:
+> Refer to the `OpenCTI/` folder for:
 > - `docker-compose.yml`
 > - `.env` (must be configured accordingly)
 
@@ -53,7 +53,7 @@ Once the containers are up and running, OpenCTI will be accessible via `http://<
 
 ---
 
-### 3️⃣ OpenCTI Add-on for Splunk
+### 3. OpenCTI Add-on for Splunk
 
 After Splunk is up and running:
 
@@ -79,7 +79,7 @@ opencti_url = http://<LOCAL SERVER IP>:8080
 
 This establishes the integration between Splunk and OpenCTI.
 
-### 4️⃣ Create Indicators in OpenCTI
+### 4. Create Indicators in OpenCTI
 From the OpenCTI UI:
 
 Navigate to "Observables" > "Indicators"
@@ -90,7 +90,7 @@ URLs
 
 These will serve as the malicious artifacts for detection.
 
-### 5️⃣ Create a Live Stream in OpenCTI
+### 5. Create a Live Stream in OpenCTI
 To enable data flow to Splunk:
 
 Go to Settings > Data Sharing > Live Streams
@@ -103,16 +103,16 @@ indicator
 
 Start the stream and copy the Stream ID
 
-### 6️⃣ Configure Splunk Input for OpenCTI Stream
+### 6. Configure Splunk Input for OpenCTI Stream
 In the Splunk UI:
 
 Create a new Input under the OpenCTI Add-on
 
 Enter the Stream ID obtained earlier
 
-✅ You should now see the OpenCTI Dashboard in Splunk, reflecting the indicators you've created.
+You should now see the OpenCTI Dashboard in Splunk, reflecting the indicators you've created.
 
-### 7️⃣ Install Snort & Zeek
+### 7. Install Snort & Zeek
 On your Target VM:
 
 Install Snort and Zeek
@@ -124,7 +124,7 @@ curl to fake C2 IP
 nslookup to fake domains
 nmap to simulate port scans
 
-### 8️⃣ Configure Splunk Forwarding
+### 8. Configure Splunk Forwarding
 Ensure Snort and Zeek logs are forwarded to Splunk:
 
 Set up Universal Forwarder or syslog ingestion.
